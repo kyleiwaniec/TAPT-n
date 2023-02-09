@@ -14,5 +14,5 @@ python ./run_language_modeling.py \
 --fasttext_model_path=output/ngrams/PTCtrain_ngrams.npy \
 --learning_rate 2e-5 \
 --no_cuda \
---per_device_train_batch_size=1 \
---per_device_eval_batch_size=1
+--per_device_train_batch_size=8 \
+--per_device_eval_batch_size=8
