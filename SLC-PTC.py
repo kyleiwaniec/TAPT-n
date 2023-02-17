@@ -68,5 +68,7 @@ trainer = Trainer(
     compute_metrics=compute_metrics,
 )
 
+print(torch.cuda.current_device())
+
 trainer.train()
 trainer.save_model()
