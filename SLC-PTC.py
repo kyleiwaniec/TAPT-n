@@ -20,7 +20,7 @@ tokenizer = tokenizer
 dataset = load_dataset('Kyleiwaniec/PTC_Corpus', use_auth_token='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')
 
 def preprocess_function(examples):
-    return tokenizer(examples["text"], truncation=True).to(device)
+    return tokenizer(examples["text"], truncation=True, return_tensors="pt").to(device)
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
 tokenized_dataset = tokenized_dataset.remove_columns(['article_id', 'text', 'technique_classification', 'offsets'])
