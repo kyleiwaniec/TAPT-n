@@ -2,7 +2,7 @@ from transformers import AutoTokenizer, AutoModel
 from datasets import load_dataset, load_metric
 from transformers import AutoModelForSequenceClassification, TrainingArguments, Trainer
 from transformers import DataCollatorWithPadding
-
+import torch
 import numpy as np
 
 # export CUDA_VISIBLE_DEVICES=0,2
