@@ -8,10 +8,9 @@ import numpy as np
 # export CUDA_VISIBLE_DEVICES=0,2
 # device = "cuda:1" # if torch.cuda.is_available() else "cpu"
 
-chkp = "models/PTC_TAPT_n_RoBERTa"
+chkp = "Kyleiwaniec/PTC_TAPT_RoBERTa_large"
 
-model = AutoModelForSequenceClassification.from_pretrained(chkp, num_labels=2)
-model = model #.to(device)
+model = AutoModelForSequenceClassification.from_pretrained(chkp, num_labels=2, use_auth_token='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')
 
 tokenizer = AutoTokenizer.from_pretrained(chkp)
 tokenizer = tokenizer
@@ -20,7 +19,7 @@ tokenizer = tokenizer
 dataset = load_dataset('Kyleiwaniec/PTC_Corpus', use_auth_token='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')
 
 def preprocess_function(examples):
-    return tokenizer(examples["text"], padding=True, truncation=True, return_tensors="pt") #.to(device)
+    return tokenizer(examples["text"], padding=True, truncation=True, return_tensors="pt")
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
 tokenized_dataset = tokenized_dataset.remove_columns(['article_id', 'text', 'technique_classification', 'offsets'])
@@ -48,7 +47,7 @@ def compute_metrics(eval_pred):
 
 #no_cuda=True
 training_args = TrainingArguments(
-    output_dir=chkp+"_tiny_PTC/",
+    output_dir=chkp+"_binary_PTC/",
     evaluation_strategy="epoch",
     learning_rate=2e-5,
     per_device_train_batch_size=32,
@@ -61,8 +60,8 @@ training_args = TrainingArguments(
 trainer = Trainer(
     model=model,
     args=training_args,
-    train_dataset=tiny_train_dataset,
-    eval_dataset=tiny_eval_dataset,
+    train_dataset=train_dataset,
+    eval_dataset=eval_dataset,
     tokenizer=tokenizer,
     data_collator=data_collator,
     compute_metrics=compute_metrics,

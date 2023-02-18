@@ -1,8 +1,6 @@
 from transformers import pipeline
-from transformers import AutoTokenizer, AutoModel
+from transformers import AutoTokenizer
 from datasets import load_dataset
-from transformers import AutoModelForSequenceClassification, TrainingArguments, Trainer
-from transformers import DataCollatorWithPadding
 import numpy as np
 from tqdm import tqdm
 from sklearn.metrics import classification_report
@@ -12,7 +10,7 @@ dataset = load_dataset('Kyleiwaniec/PTC_Corpus', use_auth_token='hf_tFUftKSebaLj
 chkp = "models/PTC_TAPT_n_RoBERTa_binary_PTC/"
 
 tokenizer = AutoTokenizer.from_pretrained(chkp)
-classifier = pipeline("text-classification", model=chkp, tokenizer=tokenizer)
+classifier = pipeline("text-classification", model=chkp, tokenizer=tokenizer, batch_size=64, device=1,num_workers=160)
 
 predictions_binary=[]
 t = tqdm(dataset['test'])
