@@ -32,8 +32,8 @@ for i in t:
     
 print(len(predictions_binary))
 
-# y_true_b = np.array(predictions_binary)[:,1]
-# y_pred_b = np.array(predictions_binary)[:,0]
+y_true_b = np.array(predictions_binary)[:,1]
+y_pred_b = np.array(predictions_binary)[:,0]
 
 print(classification_report(y_true_b, y_pred_b))
 
