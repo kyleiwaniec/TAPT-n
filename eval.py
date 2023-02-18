@@ -24,7 +24,7 @@ predictions_binary=[]
 t = tqdm(pipe(dataset))
 for i in t:
     t.set_description("processing:", refresh=True)
-    print(t)
+    print(i)
 #     pred = pipe(i['text']) # 'LABEL_0'
 #     y_hat = int(pred[0]['label'].split('_')[1])
 #     score = pred[0]['score'] if y_hat == 1 else 1-pred[0]['score']
