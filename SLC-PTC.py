@@ -65,7 +65,7 @@ def compute_metrics(eval_pred):
     return  metrics.compute(predictions=predictions, references=labels)
 
 model_name = chkp.split("/")[-1]
-out_dir = "../models/PTC_TAPT_n_RoBERTa_SLC_PTC/"
+out_dir = "../models/PTC_TAPT_n_RoBERTa_SLC_PTC_e9/"
 
 #no_cuda=True
 training_args = TrainingArguments(
@@ -77,7 +77,7 @@ training_args = TrainingArguments(
     learning_rate=2e-5,
     per_device_train_batch_size=8,
     per_device_eval_batch_size=8,
-    num_train_epochs=3,
+    num_train_epochs=9,
     weight_decay=0.01
 )
 
