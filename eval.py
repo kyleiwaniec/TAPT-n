@@ -7,10 +7,10 @@ from sklearn.metrics import classification_report
 
 dataset = load_dataset('Kyleiwaniec/PTC_Corpus', use_auth_token='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')
 
-chkp = "models/PTC_TAPT_n_RoBERTa_binary_PTC/"
+chkp = "../models/PTC_TAPT_RoBERTa_large_SLC/"
 
 tokenizer = AutoTokenizer.from_pretrained(chkp)
-classifier = pipeline("text-classification", model=chkp, tokenizer=tokenizer, batch_size=64, device=1,num_workers=160)
+classifier = pipeline("text-classification", model=chkp, tokenizer=tokenizer, batch_size=64, device=0,num_workers=160)
 
 predictions_binary=[]
 t = tqdm(dataset['test'])
