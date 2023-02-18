@@ -11,10 +11,7 @@ import numpy as np
 chkp = "Kyleiwaniec/PTC_TAPT_RoBERTa_large"
 
 model = AutoModelForSequenceClassification.from_pretrained(chkp, num_labels=2, use_auth_token='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')
-
-tokenizer = AutoTokenizer.from_pretrained(chkp)
-tokenizer = tokenizer
-
+tokenizer = AutoTokenizer.from_pretrained(chkp, use_auth_token='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')
 
 dataset = load_dataset('Kyleiwaniec/PTC_Corpus', use_auth_token='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')
 
