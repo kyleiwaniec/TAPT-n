@@ -41,10 +41,12 @@ def compute_metrics(eval_pred):
     predictions = np.argmax(logits, axis=-1)
     return  metrics.compute(predictions=predictions, references=labels)
 
+model_name = chkp.split("/")[-1]
+out_dir = "../models/"+model_name+"_SLC/"
 
 #no_cuda=True
 training_args = TrainingArguments(
-    output_dir=chkp+"_binary_PTC/",
+    output_dir=out_dir,
     evaluation_strategy="epoch",
     learning_rate=2e-5,
     per_device_train_batch_size=32,
