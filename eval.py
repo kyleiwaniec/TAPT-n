@@ -4,6 +4,7 @@ from datasets import load_dataset
 from transformers import AutoModelForSequenceClassification, TrainingArguments, Trainer
 from transformers import DataCollatorWithPadding
 import numpy as np
+from tqdm import tqdm
 from sklearn.metrics import classification_report
 
 dataset = load_dataset('Kyleiwaniec/PTC_Corpus', use_auth_token='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')
@@ -14,7 +15,9 @@ tokenizer = AutoTokenizer.from_pretrained(chkp)
 classifier = pipeline("text-classification", model=chkp, tokenizer=tokenizer)
 
 predictions_binary=[]
-for i in dataset['test']:
+t = tqdm(dataset['test'])
+for i in t:
+    t.set_description("processing:", refresh=True)
     pred = classifier(i['text']) # 'LABEL_0'
     y_hat = int(pred[0]['label'].split('_')[1])
     score = pred[0]['score'] if y_hat == 1 else 1-pred[0]['score']
