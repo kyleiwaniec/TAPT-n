@@ -4,7 +4,7 @@ from datasets import load_dataset
 import numpy as np
 from tqdm import tqdm
 from sklearn.metrics import classification_report
-from transformers.pipelines.pt_utils import KeyDataset
+from transformers.pipelines.pt_utils import KeyDataset, KeyPairDataset
 
 dataset = load_dataset('Kyleiwaniec/PTC_Corpus',
                        split="test",
