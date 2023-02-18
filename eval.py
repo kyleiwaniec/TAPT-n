@@ -21,7 +21,7 @@ pipe = pipeline("text-classification",
                       num_workers=160)
 
 predictions_binary=[]
-t = tqdm(pipe(KeyPairDataset(dataset, "text","labels"))
+t = tqdm(pipe(KeyPairDataset(dataset, "text","labels")))
 for i in t:
     t.set_description("processing:", refresh=True)
     print(i)
