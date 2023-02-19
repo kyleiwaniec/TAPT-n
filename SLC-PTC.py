@@ -9,13 +9,11 @@ import numpy as np
 # device = "cuda:0" # if torch.cuda.is_available() else "cpu"
 
 chkp = "Kyleiwaniec/PTC_TAPT_RoBERTa_large"
-model = AutoModelForSequenceClassification.from_pretrained(chkp, use_auth_token='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', num_labels=15)
+model = AutoModelForSequenceClassification.from_pretrained(chkp, use_auth_token='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', num_labels=19)
 tokenizer = AutoTokenizer.from_pretrained(chkp, use_auth_token='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')
 
 dataset = load_dataset('Kyleiwaniec/PTC_Corpus', use_auth_token='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')
 
-# def preprocess_function(examples):
-#     return tokenizer(examples["text"], padding=True, truncation=True, return_tensors="pt")
 
 def preprocess_function(examples):
     return tokenizer(examples["text"], padding=True, truncation=True, return_tensors="pt")
@@ -23,7 +21,7 @@ def preprocess_function(examples):
 classification = 'multi' #'binary'
 
 def update_labels(example):
-    example['labels'] = example['labels'][0] if len(example['labels']) else 14
+    example['labels'] = example['labels'][0] if len(example['labels']) else 18
     return example
 
 
