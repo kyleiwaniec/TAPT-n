@@ -6,7 +6,7 @@ import torch
 import numpy as np
 
 # export CUDA_VISIBLE_DEVICES=0,2
-# device = "cuda:1" # if torch.cuda.is_available() else "cpu"
+# device = "cuda:0" # if torch.cuda.is_available() else "cpu"
 
 chkp = "Kyleiwaniec/PTC_TAPT_RoBERTa_large"
 model = AutoModelForSequenceClassification.from_pretrained(chkp, use_auth_token='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', num_labels=2)
@@ -65,7 +65,7 @@ def compute_metrics(eval_pred):
     return  metrics.compute(predictions=predictions, references=labels)
 
 model_name = chkp.split("/")[-1]
-out_dir = "../models/PTC_TAPT_n_RoBERTa_SLC_PTC_e9/"
+out_dir = "../models/PTC_TAPT_n_RoBERTa_SLC_PTC_e3.2/"
 
 #no_cuda=True
 training_args = TrainingArguments(
@@ -75,11 +75,15 @@ training_args = TrainingArguments(
     save_steps=1500,
     save_total_limit=6,
     learning_rate=2e-5,
+    gradient_accumulation_steps=8,
     per_device_train_batch_size=8,
     per_device_eval_batch_size=8,
-    num_train_epochs=9,
+    num_train_epochs=3,
     weight_decay=0.01
 )
+# optim="adafactor"
+# gradient_accumulation_steps - effectively increases the batch to gradient_accumulation_steps * per_device_train_batch_size
+# https://huggingface.co/docs/transformers/main/en/perf_train_gpu_one
 
 # compute_metrics=compute_metrics,
 trainer = Trainer(
