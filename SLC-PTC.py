@@ -18,7 +18,7 @@ dataset = load_dataset('Kyleiwaniec/PTC_Corpus', use_auth_token='hf_tFUftKSebaLj
 #     return tokenizer(examples["text"], padding=True, truncation=True, return_tensors="pt")
 
 def preprocess_function(examples):
-    return tokenizer(examples["text"], truncation=True)
+    return tokenizer(examples["text"], padding=True, truncation=True, return_tensors="pt")
 
 classification = 'multi' #'binary'
 
