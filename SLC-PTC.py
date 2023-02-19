@@ -60,7 +60,7 @@ metrics = load_metric("f1","matthews_correlation")
 def compute_metrics(eval_pred):
     logits, labels = eval_pred
     predictions = np.argmax(logits, axis=-1)
-    return  metrics.compute(predictions=predictions, references=labels)
+    return  metrics.compute(predictions=predictions, average='weighted', references=labels)
 
 model_name = chkp.split("/")[-1]
 out_dir = "../models/TAPT_n_RoBERTa_TC_PTC/"
