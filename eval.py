@@ -6,9 +6,24 @@ from tqdm import tqdm
 from sklearn.metrics import classification_report
 from transformers.pipelines.pt_utils import KeyDataset, KeyPairDataset
 
+classification_type = "multi" #binary
+
+def update_labels(example):
+    example['labels'] = example['labels'][0] if len(example['labels']) else 18
+    return example
+
+
 dataset = load_dataset('Kyleiwaniec/PTC_Corpus',
                        split="test",
                        use_auth_token='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')
+
+if classification_type == "multi":
+    dataset = dataset.rename_column("labels", "binary_labels")
+    dataset = dataset.rename_column("technique_classification", "labels")
+
+    # use only the first label.
+    dataset = dataset.map(update_labels, num_proc=4)
+
 
 chkp = "../models/TAPT_n_RoBERTa_TC_PTC/"
 
