@@ -29,7 +29,7 @@ for i in t:
 #     score = pred[0]['score'] if y_hat == 1 else 1-pred[0]['score']
     y = i['labels']
 #     predictions_binary.append([y_hat,y,score])
-    predictions.append([y_hat,y]
+    predictions.append([y_hat,y])
     
 print(len(predictions))
 
