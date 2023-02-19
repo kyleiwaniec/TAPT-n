@@ -14,7 +14,7 @@ def update_labels(example):
 
 
 dataset = load_dataset('Kyleiwaniec/PTC_Corpus',
-                       split="test",
+                       split="validation",
                        use_auth_token='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')
 
 if classification_type == "multi":
