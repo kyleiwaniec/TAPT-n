@@ -8,7 +8,6 @@ from transformers.pipelines.pt_utils import KeyDataset, KeyPairDataset
 
 dataset = load_dataset('Kyleiwaniec/PTC_Corpus',
                        split="test",
-                       num_proc=12,
                        use_auth_token='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')
 
 chkp = "../models/PTC_TAPT_n_RoBERTa_SLC_PTC_e9/"

@@ -9,7 +9,7 @@ import numpy as np
 # device = "cuda:0" # if torch.cuda.is_available() else "cpu"
 
 chkp = "Kyleiwaniec/PTC_TAPT_RoBERTa_large"
-model = AutoModelForSequenceClassification.from_pretrained(chkp, use_auth_token='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', num_labels=2)
+model = AutoModelForSequenceClassification.from_pretrained(chkp, use_auth_token='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', num_labels=15)
 tokenizer = AutoTokenizer.from_pretrained(chkp, use_auth_token='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')
 
 dataset = load_dataset('Kyleiwaniec/PTC_Corpus', use_auth_token='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')
@@ -20,7 +20,7 @@ dataset = load_dataset('Kyleiwaniec/PTC_Corpus', use_auth_token='hf_tFUftKSebaLj
 def preprocess_function(examples):
     return tokenizer(examples["text"], truncation=True)
 
-classification = 'binary' #'binary'
+classification = 'multi' #'binary'
 
 def update_labels(example):
     example['labels'] = example['labels'][0] if len(example['labels']) else 14
@@ -65,7 +65,7 @@ def compute_metrics(eval_pred):
     return  metrics.compute(predictions=predictions, references=labels)
 
 model_name = chkp.split("/")[-1]
-out_dir = "../models/PTC_TAPT_n_RoBERTa_SLC_PTC_e3.2/"
+out_dir = "../models/TAPT_n_RoBERTa_TC_PTC/"
 
 #no_cuda=True
 training_args = TrainingArguments(
